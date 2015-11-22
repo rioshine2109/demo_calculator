@@ -12,6 +12,9 @@ public class HelloWorld {
 		Mutil m = new Mutil();
 		int result2 = m.mutil(2, 5);
 		System.out.println(result2);
+		
+		int result3 = Sub.subc(2, 5);
+		System.out.println(result3);
 	}
 	
 
