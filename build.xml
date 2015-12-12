@@ -86,5 +86,5 @@
             <report format="frames" todir="${junit.output.dir}"/>
         </junitreport>
     </target>
-    <target name="main" depends="cleanall, build, ConcateTest"/>
+    <target name="main" depends="ConcateTest"/>
 </project>
