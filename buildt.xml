@@ -1,0 +1,75 @@
+
+</project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="demo" basedir="." default="main">
+
+    <property name="src.dir"     value="src"/>
+
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+
+    <property name="main-class"  value="main.HelloWorld"/>
+	
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        
+    </target>
+	<target name="run-test">
+	    <junit printsummary="on" >
+	        <test name="calculator.ConcateTest"/>
+	        <classpath>
+	            
+	            <pathelement location=".\lib\junit.jar"/>
+	            <pathelement location="src.dir"/>
+	        </classpath>
+	        <batchtest fork="yes">
+            <fileset dir="${src.dir}" includes="*ConcateTest.java"/>
+        </batchtest>
+	    </junit>
+	</target>
+    
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="true" includeantruntime="true" classpath=".\lib\junit.jar"/>
+        
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+	<target name="junit" depends="compile">
+        <echo message="${p}/${prj}/build/classes/" />
+
+        <junit fork="yes" printsummary="yes">
+
+            <formatter type="xml" />
+            <!-- Add all your test class names here. -->
+            <formatter type="plain" />
+            <batchtest todir="./build/classes">
+                <fileset dir="./build/classes/">
+                    <include name="**/demo.*" />
+                </fileset>
+            </batchtest>
+
+            <classpath>
+         		<pathelement location=".\lib\junit.jar"/>
+	            <pathelement location="src"/>
+            </classpath>
+        </junit>
+    </target>
+    <target name="run" depends="jar">
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+    <target name="main" depends="clean-build,run,run-test"/>
+    
+
+</project>

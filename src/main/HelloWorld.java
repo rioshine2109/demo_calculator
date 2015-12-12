@@ -9,8 +9,9 @@ public class HelloWorld {
 		int result = a.Add(20, 10);
 		System.out.println(result);
 		
-		int result3 = Sub.sub(2, 5);
-		System.out.println(result3);
+		Mutil m = new Mutil();
+		int result2 = m.mutil(2, 5);
+		System.out.println(result2);
 	}
 	
 
